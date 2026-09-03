@@ -161,7 +161,8 @@ function createCuratedItinerary(destination, days) {
 }
 
 export async function generateItinerary(destination, days, interests = []) {
-  const candidateModels = ['gemini-3.5-flash-lite', 'gemini-3.7-flash'];
+  const candidateModels = ['gemini-3.6-flash', 'gemini-2.5-flash-lite', 'gemini-3.5-flash-lite', 'gemini-3.7-flash'];
+
 
   const prompt = `${ITINERARY_SYSTEM_PROMPT}
 

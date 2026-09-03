@@ -8,9 +8,10 @@ import { fetchDynamicDestination } from '../services/destinationFetcher';
 import { useWeather } from '../hooks/useWeather';
 import { resolveDestinationImage } from '../services/imageResolver';
 import { getDestinationFallback } from '../utils/fallbackImages';
-
+import { generateItinerary } from '../services/geminiApi';
 
 import WeatherWidget from '../components/WeatherWidget';
+
 import FamousPlaceCard from '../components/FamousPlaceCard';
 import ItineraryView from '../components/ItineraryView';
 import ChatBot from '../components/ChatBot';
