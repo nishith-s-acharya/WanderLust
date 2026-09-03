@@ -6,17 +6,32 @@
 
 .search-bar__icon {
   position: absolute;
-  left: var(--spacing-20);
+  left: 18px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--color-obsidian-50);
+  color: var(--color-obsidian-60);
   pointer-events: none;
+  z-index: 2;
 }
 
-.search-bar__input {
-  padding-left: var(--spacing-48);
-  padding-right: var(--spacing-48);
+.search-bar__input.input-pill {
+  padding-left: 52px !important;
+  padding-right: 48px !important;
+  height: 52px;
+  background-color: var(--surface-card);
+  border: 1.5px solid var(--color-obsidian-20);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  font-size: var(--text-body);
+  color: var(--color-obsidian);
+  border-radius: var(--radius-inputs);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color 0.35s ease;
 }
+
+.search-bar__input.input-pill:focus {
+  border-color: var(--color-ember);
+  box-shadow: 0 0 0 3px rgba(252, 80, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
 
 .search-bar__clear {
   position: absolute;
