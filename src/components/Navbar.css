@@ -1,0 +1,174 @@
+/* ── Glassmorphism Navbar ── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: var(--spacing-12) 0;
+  /* always glassmorphism */
+  background: var(--nav-glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--nav-glass-border);
+  transition: background-color 0.4s ease, border-color 0.4s ease, padding var(--transition-base), box-shadow 0.4s ease;
+}
+
+.navbar--scrolled {
+  background: var(--nav-glass-scrolled);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  padding: var(--spacing-8) 0;
+  border-bottom: 1px solid var(--nav-glass-border);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* glass pill inner container */
+  background: var(--nav-inner-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--radius-pills);
+  border: 1px solid var(--nav-inner-border);
+  padding: var(--spacing-10) var(--spacing-10) var(--spacing-10) var(--spacing-20);
+  gap: var(--spacing-8);
+  box-shadow: var(--nav-inner-shadow);
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.navbar--scrolled .navbar__inner {
+  background: var(--nav-inner-bg);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.16);
+}
+
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  color: var(--color-obsidian);
+  flex-shrink: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.navbar__logo:hover {
+  opacity: 0.75;
+}
+
+.navbar__wordmark {
+  font-family: var(--font-display);
+  font-size: var(--text-subheading);
+  line-height: 1;
+  letter-spacing: var(--tracking-heading);
+  text-transform: uppercase;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.navbar__link {
+  padding: var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-pills);
+  font-size: var(--text-body-sm);
+  color: var(--color-obsidian);
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.navbar__link:hover {
+  color: var(--color-ember);
+  background-color: rgba(252, 80, 0, 0.06);
+}
+
+.navbar__link--active {
+  color: var(--color-ember);
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.navbar__cta {
+  font-size: var(--text-body-sm);
+  padding: var(--spacing-10) var(--spacing-20);
+}
+
+.navbar__hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pills);
+  color: var(--color-obsidian);
+  transition: background-color var(--transition-fast);
+}
+
+.navbar__hamburger:hover {
+  background-color: rgba(7, 6, 7, 0.06);
+}
+
+/* Mobile dropdown — also glassmorphism */
+.navbar__mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  padding: var(--spacing-16) var(--spacing-24);
+  background: var(--nav-mobile-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--nav-glass-border);
+  border-radius: var(--radius-cards);
+  margin: var(--spacing-8) var(--spacing-24) 0;
+  animation: slideUp var(--transition-base) ease;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+
+.navbar__mobile-link {
+  display: block;
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-medium);
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-body);
+  color: var(--color-obsidian);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.navbar__mobile-link:hover {
+  background-color: rgba(252, 80, 0, 0.06);
+  color: var(--color-ember);
+}
+
+.navbar__mobile-cta {
+  margin-top: var(--spacing-8);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__cta {
+    display: none;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  .navbar__mobile-menu {
+    display: flex;
+  }
+}

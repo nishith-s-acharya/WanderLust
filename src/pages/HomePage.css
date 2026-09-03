@@ -1,0 +1,142 @@
+/* ── Featured Destinations Section ── */
+.home__featured-section {
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.home__featured-header {
+  margin-bottom: var(--spacing-40);
+}
+
+.home__featured-header h2 {
+  margin-bottom: var(--spacing-8);
+}
+
+.home__featured-subtitle {
+  color: var(--color-obsidian-50);
+  font-size: var(--text-body);
+}
+
+/* ── Weather Section ── */
+.home__weather-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-24);
+  align-items: start;
+}
+
+
+.home__weather-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.home__weather-placeholder-text {
+  color: var(--color-obsidian-50);
+  text-align: center;
+  max-width: 300px;
+}
+
+.home__destinations-header {
+  margin-bottom: var(--spacing-32);
+}
+
+.home__destinations-header h2 {
+  margin-bottom: var(--spacing-8);
+}
+
+.home__destinations-subtitle {
+  color: var(--color-obsidian-50);
+  font-size: var(--text-body);
+}
+
+.home__destinations-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  margin-bottom: var(--spacing-40);
+}
+
+.home__cta-section {
+  padding: var(--section-gap) 0;
+  padding-bottom: calc(var(--section-gap) * 1.5);
+}
+
+.home__cta-card {
+  position: relative;
+  background-color: var(--color-ember);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-64) var(--spacing-48);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-48);
+}
+
+.home__cta-halftone {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  background-image: radial-gradient(circle, var(--color-obsidian) 1px, transparent 1px);
+  background-size: 6px 6px;
+  pointer-events: none;
+}
+
+.home__cta-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+}
+
+.home__cta-title {
+  color: var(--color-chalk);
+  margin-bottom: var(--spacing-16);
+  font-size: var(--text-heading-xl);
+  line-height: 1.05;
+}
+
+.home__cta-text {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  margin-bottom: var(--spacing-32);
+}
+
+.home__cta-btn {
+  background-color: #070607;
+  color: #ffffff !important;
+  padding: var(--spacing-16) var(--spacing-32);
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.home__cta-btn:hover {
+  background-color: #222222;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 768px) {
+  .home__weather-section {
+    grid-template-columns: 1fr;
+  }
+
+  .home__cta-card {
+    padding: var(--spacing-40) var(--spacing-24);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .home__cta-btn {
+    width: 100%;
+    text-align: center;
+    display: block;
+  }
+}

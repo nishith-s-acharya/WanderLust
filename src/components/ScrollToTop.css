@@ -1,0 +1,86 @@
+.scroll-to-top {
+  position: fixed;
+  bottom: var(--spacing-32);
+  right: 90px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 99;
+  opacity: 0;
+  transform: translateY(20px) scale(0.85);
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.scroll-to-top--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-4px) scale(1.05);
+  border-color: var(--color-ember);
+  box-shadow: 0 14px 36px rgba(235, 94, 40, 0.3);
+}
+
+.scroll-to-top__ring {
+  position: absolute;
+  inset: 1px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.scroll-to-top__ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 2.5;
+}
+
+[data-theme='light'] .scroll-to-top__ring-bg {
+  stroke: rgba(0, 0, 0, 0.08);
+}
+
+.scroll-to-top__ring-fill {
+  fill: none;
+  stroke: var(--color-ember);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 126;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.scroll-to-top__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.scroll-to-top:hover .scroll-to-top__icon-wrap {
+  color: var(--color-ember);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    right: 20px;
+    bottom: 84px;
+    width: 42px;
+    height: 42px;
+  }
+}

@@ -1,0 +1,122 @@
+.footer {
+  background-color: #070607;
+  color: var(--color-chalk);
+  margin-top: var(--section-gap);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 0.4s ease;
+}
+
+[data-theme="dark"] .footer {
+  background-color: #060508;
+}
+
+
+.footer__inner {
+  padding: var(--spacing-64) var(--spacing-24) var(--spacing-32);
+}
+
+.footer__top {
+  display: flex;
+  gap: var(--spacing-40);
+  align-items: flex-start;
+}
+
+.footer__brand {
+  flex: 1.5;
+  min-width: 200px;
+}
+
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  color: var(--color-chalk);
+  margin-bottom: var(--spacing-12);
+}
+
+.footer__wordmark {
+  font-family: var(--font-display);
+  font-size: var(--text-subheading);
+  line-height: 1;
+  letter-spacing: var(--tracking-heading);
+  text-transform: uppercase;
+}
+
+.footer__tagline {
+  font-size: var(--text-body-sm);
+  color: rgba(255, 255, 255, 0.5);
+  line-height: var(--leading-body);
+  max-width: 260px;
+}
+
+.footer__divider-v {
+  border-color: rgba(255, 255, 255, 0.15);
+  min-height: 80px;
+  align-self: stretch;
+}
+
+.footer__links-group {
+  flex: 1;
+  min-width: 120px;
+}
+
+.footer__links-title {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  letter-spacing: var(--tracking-heading);
+  text-transform: uppercase;
+  color: var(--color-chalk);
+  margin-bottom: var(--spacing-16);
+}
+
+.footer__links-group nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.footer__link {
+  font-size: var(--text-body-sm);
+  color: rgba(255, 255, 255, 0.5);
+  transition: color var(--transition-fast);
+  display: block;
+}
+
+.footer__link:hover {
+  color: var(--color-ember);
+}
+
+.footer .divider-dotted {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+.footer__copyright,
+.footer__credit {
+  font-family: var(--font-caption);
+  font-size: var(--text-caption);
+  color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+  .footer__top {
+    flex-direction: column;
+    gap: var(--spacing-32);
+  }
+
+  .footer__divider-v {
+    display: none;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}

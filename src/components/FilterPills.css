@@ -1,0 +1,48 @@
+.filter-pills {
+  display: flex;
+  gap: var(--spacing-8);
+  flex-wrap: wrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: var(--spacing-4);
+}
+
+.filter-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-pill {
+  padding: var(--spacing-8) var(--spacing-20);
+  border-radius: var(--radius-pills);
+  border: 1.5px solid var(--color-obsidian-10);
+  background: transparent;
+  color: var(--color-obsidian);
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-body-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.filter-pill:hover {
+  border-color: var(--color-obsidian);
+}
+
+.filter-pill--active {
+  background-color: var(--color-ember);
+  border-color: var(--color-ember);
+  color: var(--color-chalk);
+}
+
+
+.filter-pill--active:hover {
+  background-color: var(--color-ember-hover);
+  border-color: var(--color-ember-hover);
+}
+
+.filter-pill:focus-visible {
+  outline: 3px solid var(--color-ember);
+  outline-offset: 2px;
+}

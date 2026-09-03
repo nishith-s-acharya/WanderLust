@@ -1,0 +1,106 @@
+.famous-place-card {
+  padding: 0;
+  overflow: hidden;
+  animation: slideUp var(--transition-slow) ease both;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-base);
+}
+
+.famous-place-card:hover {
+  transform: translateY(-3px);
+}
+
+.famous-place-card__image-wrap {
+  height: 240px;
+  overflow: hidden;
+  border-radius: var(--radius-cards) var(--radius-cards) 0 0;
+}
+
+.famous-place-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow), opacity var(--transition-base);
+  opacity: 0;
+}
+
+.famous-place-card__image--loaded {
+  opacity: 1;
+}
+
+.famous-place-card:hover .famous-place-card__image {
+  transform: scale(1.03);
+}
+
+.famous-place-card__image-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.famous-place-card__body {
+  padding: var(--spacing-24);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.famous-place-card__header {
+  display: flex;
+  gap: var(--spacing-8);
+}
+
+.famous-place-card__name {
+  font-size: var(--text-subheading);
+  margin-top: var(--spacing-4);
+}
+
+.famous-place-card__description {
+  font-size: var(--text-body-sm);
+  line-height: var(--leading-body);
+  color: var(--color-obsidian);
+  flex: 1;
+}
+
+.famous-place-card__tip {
+  display: flex;
+  gap: var(--spacing-10);
+  padding: var(--spacing-16);
+  background-color: var(--color-obsidian-05);
+  border-radius: var(--radius-medium);
+  margin-top: auto;
+  padding-top: var(--spacing-16);
+  border-left: 3px solid var(--color-ember);
+}
+
+
+.famous-place-card__tip-icon {
+  flex-shrink: 0;
+  color: var(--color-ember);
+  margin-top: 2px;
+}
+
+.famous-place-card__tip-text {
+  font-size: var(--text-body-sm);
+  line-height: var(--leading-body);
+  color: var(--color-obsidian);
+}
+
+.famous-place-card__credit {
+  padding: var(--spacing-12) var(--spacing-24);
+  border-top: 1.5px dotted var(--color-obsidian-10);
+  font-family: var(--font-caption);
+  font-size: 11px;
+  color: var(--color-obsidian-50);
+}
+
+.famous-place-card__credit a {
+  color: var(--color-obsidian);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.famous-place-card__credit a:hover {
+  color: var(--color-ember);
+}

@@ -1,0 +1,108 @@
+.location-picker {
+  animation: slideUp var(--transition-slow) ease both;
+}
+
+.location-picker__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  margin-bottom: var(--spacing-24);
+}
+
+.location-picker__icon {
+  color: var(--color-ember);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.location-picker__title {
+  font-size: var(--text-subheading);
+  margin-bottom: var(--spacing-4);
+}
+
+.location-picker__subtitle {
+  font-size: var(--text-body-sm);
+  color: var(--color-obsidian-50);
+}
+
+.location-picker__actions {
+  display: flex;
+  gap: var(--spacing-12);
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.location-picker__geo-btn {
+  flex-shrink: 0;
+  font-size: var(--text-body-sm);
+  padding: var(--spacing-10) var(--spacing-20);
+}
+
+.location-picker__search {
+  display: flex;
+  gap: var(--spacing-8);
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+
+.location-picker__input {
+  flex: 1;
+  padding: var(--spacing-10) var(--spacing-16);
+  font-size: var(--text-body-sm);
+  background-color: var(--color-pumice);
+  border: 1.5px solid transparent;
+  transition: border-color var(--transition-fast);
+}
+
+.location-picker__input:focus {
+  border-color: var(--color-ember);
+  outline: none;
+}
+
+.location-picker__search-btn {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-ember);
+  color: var(--color-chalk);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.location-picker__search-btn:hover:not(:disabled) {
+  background-color: var(--color-ember-hover);
+}
+
+.location-picker__search-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.location-picker__loader {
+  animation: spin 1s linear infinite;
+}
+
+.location-picker__error {
+  margin-top: var(--spacing-12);
+  font-size: var(--text-body-sm);
+  color: var(--color-ember);
+}
+
+@media (max-width: 600px) {
+  .location-picker__actions {
+    flex-direction: column;
+  }
+
+  .location-picker__geo-btn {
+    width: 100%;
+  }
+}
