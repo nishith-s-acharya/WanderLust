@@ -40,26 +40,30 @@ export const DESTINATION_FALLBACKS = {
   barcelona: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&q=80',
   cape_town: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=800&q=80',
   marrakech: 'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=800&q=80',
-  oaxaca: 'https://images.unsplash.com/photo-1512815776622-9febc0c0e3a6?w=800&q=80'
+  oaxaca: 'https://images.unsplash.com/photo-1512815776622-9febc0c0e3a6?w=800&q=80',
+  davangere: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/HBPA_N_1107_Davanagere_Glass_House.jpg/1280px-HBPA_N_1107_Davanagere_Glass_House.jpg',
+  davanagere: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/HBPA_N_1107_Davanagere_Glass_House.jpg/1280px-HBPA_N_1107_Davanagere_Glass_House.jpg'
 };
 
+// Neutral ambient travel photography — avoids false attributions to specific world landmarks like Taj Mahal or Big Ben
 export const CATEGORY_FALLBACKS = {
-  Temple: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80',
-  Landmark: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80',
-  Museum: 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=800&q=80',
-  Nature: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80',
-  Beach: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
-  Historical: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80',
-  'Archaeological Site': 'https://images.unsplash.com/photo-1526392060635-9d6019884377?w=800&q=80',
-  Market: 'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=800&q=80',
-  Neighbourhood: 'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=800&q=80',
-  Adventure: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80',
-  Urban: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80',
-  Food: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80',
-  Culture: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&q=80'
+  Temple: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80', // Serene temple bells & architecture
+  Landmark: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800&q=80', // Scenic coastal town vista
+  Museum: 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=800&q=80', // Gallery hall
+  Nature: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80', // Mist over green hills
+  Beach: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80', // Tropical shoreline
+  Historical: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80', // Ancient stone heritage alley
+  'Archaeological Site': 'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80', // Heritage stone architecture
+  Market: 'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=800&q=80', // Vibrant local market
+  Neighbourhood: 'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=800&q=80', // Atmospheric cobbled street
+  Adventure: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80', // Scenic road trip vista
+  Urban: 'https://images.unsplash.com/photo-1477959858617-67f30bc75b82?w=800&q=80', // Warm dusk city street
+  Food: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80', // Culinary preparation
+  Culture: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800&q=80' // Traditional cultural archways
 };
 
 const DEFAULT_FALLBACK = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80';
+
 
 /**
  * Returns a guaranteed high-res travel image for a destination

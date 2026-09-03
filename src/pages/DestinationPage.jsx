@@ -6,8 +6,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getDestinationById } from '../data/destinations';
 import { fetchDynamicDestination } from '../services/destinationFetcher';
 import { useWeather } from '../hooks/useWeather';
-import { searchPhotos } from '../services/unsplashApi';
+import { resolveDestinationImage } from '../services/imageResolver';
 import { getDestinationFallback } from '../utils/fallbackImages';
+
 
 import WeatherWidget from '../components/WeatherWidget';
 import FamousPlaceCard from '../components/FamousPlaceCard';
@@ -61,18 +62,29 @@ export default function DestinationPage() {
 
   useEffect(() => {
     if (destination) {
-      const fallbackUrl = destination.wikivoyageThumbnail || getDestinationFallback(destination);
+      const fallbackUrl = destination.wikivoyageThumbnail || destination.image || getDestinationFallback(destination);
       setHeroImage({ url: fallbackUrl });
 
-      searchPhotos(`${destination.name} ${destination.country} travel landmark`, 1)
-        .then(photos => {
-          if (photos.length > 0) {
-            setHeroImage(photos[0]);
+      // If destination already has a verified authentic thumbnail or image, use it directly
+      if (destination.wikivoyageThumbnail || destination.image) {
+        return;
+      }
+
+      let isMounted = true;
+      resolveDestinationImage(destination)
+        .then(resolved => {
+          if (isMounted && resolved) {
+            setHeroImage(resolved);
           }
         })
         .catch(() => {});
+
+      return () => {
+        isMounted = false;
+      };
     }
   }, [destination]);
+
 
 
   // GSAP scroll animations — run after destination loads

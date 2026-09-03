@@ -1,28 +1,48 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, ArrowRight } from 'lucide-react';
-import { searchPhotos } from '../services/unsplashApi';
+import { resolveDestinationImage } from '../services/imageResolver';
 import { getDestinationFallback } from '../utils/fallbackImages';
 import './DestinationCard.css';
 
 export default function DestinationCard({ destination, index = 0 }) {
-  const fallbackUrl = destination.wikivoyageThumbnail || getDestinationFallback(destination);
-  const [image, setImage] = useState(() => ({ urlSmall: fallbackUrl }));
+  const initialUrl = destination.wikivoyageThumbnail || destination.image || getDestinationFallback(destination);
+  const [image, setImage] = useState(() => ({
+    urlSmall: initialUrl,
+    alt: `${destination.name}, ${destination.country}`
+  }));
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    searchPhotos(`${destination.name} ${destination.country} travel landmark`, 1)
-      .then(photos => {
-        if (photos.length > 0) {
-          setImage(photos[0]);
-        } else {
-          setImage({ urlSmall: fallbackUrl });
+    // If destination already has a verified authentic thumbnail or image, use it directly
+    if (destination.wikivoyageThumbnail || destination.image) {
+      const verifiedUrl = destination.wikivoyageThumbnail || destination.image;
+      setImage({
+        urlSmall: verifiedUrl,
+        alt: `${destination.name}, ${destination.country}`
+      });
+      return;
+    }
+
+    let isMounted = true;
+    resolveDestinationImage(destination)
+      .then(resolved => {
+        if (isMounted && resolved) {
+          setImage(resolved);
         }
       })
       .catch(() => {
-        setImage({ urlSmall: fallbackUrl });
+        if (isMounted) {
+          setImage({ urlSmall: initialUrl, alt: `${destination.name}, ${destination.country}` });
+        }
       });
-  }, [destination.name, destination.country, fallbackUrl]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [destination, initialUrl]);
+
+
 
   return (
     <Link

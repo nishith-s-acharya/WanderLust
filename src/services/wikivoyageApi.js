@@ -87,3 +87,27 @@ export async function fetchWikivoyageSummary(title) {
     return null;
   }
 }
+
+/**
+ * Search Wikipedia Pageimages for any place, landmark, temple, or city
+ * Returns direct high-res image URL or null if no page/image exists
+ */
+export async function searchWikipediaImage(query) {
+  if (!query || !query.trim()) return null;
+  const q = encodeURIComponent(query.trim());
+  const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=original|thumbnail&pithumbsize=1200&generator=search&gsrsearch=${q}&gsrlimit=1&origin=*`;
+
+  try {
+    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const pages = data.query?.pages;
+    if (!pages) return null;
+    const page = Object.values(pages)[0];
+    return page?.thumbnail?.source || page?.original?.source || null;
+  } catch (err) {
+    console.warn('Wikipedia image search error:', err.message);
+    return null;
+  }
+}
+

@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { getDestinationById, saveCustomDestination, getAllDestinations } from '../data/destinations.js';
-import { fetchWikivoyageSummary } from './wikivoyageApi.js';
+import { fetchWikivoyageSummary, searchWikipediaImage } from './wikivoyageApi.js';
+
 
 const GEMINI_API_KEY = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GEMINI_API_KEY) || (typeof process !== 'undefined' && process.env?.VITE_GEMINI_API_KEY);
 const WEATHER_API_KEY = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_OPENWEATHER_API_KEY) || (typeof process !== 'undefined' && process.env?.VITE_OPENWEATHER_API_KEY);
@@ -80,7 +81,7 @@ Respond ONLY with a valid JSON object (no markdown formatting, no code fences):
 
 Ensure famousPlaces has exactly 4 renowned, real landmarks in ${geoInfo.name}.`;
 
-  const candidateModels = ['gemini-3.5-flash-lite', 'gemini-3.7-flash'];
+  const candidateModels = ['gemini-3.6-flash', 'gemini-2.5-flash-lite', 'gemini-3.5-flash-lite', 'gemini-3.7-flash'];
 
   for (const modelName of candidateModels) {
     try {
@@ -99,6 +100,7 @@ Ensure famousPlaces has exactly 4 renowned, real landmarks in ${geoInfo.name}.`;
       console.warn(`Gemini model ${modelName} destination generation warning:`, err.message);
     }
   }
+
 
   // Graceful fallback if AI is experiencing 503 spike, using Wikivoyage extract
   return {
@@ -192,6 +194,15 @@ export async function fetchDynamicDestination(cityName) {
   // 3. Generate travel profile grounded in Wikivoyage data
   const profile = await generateDestinationProfile(geoInfo, wiki);
 
+  let verifiedThumbnail = wiki?.thumbnail || null;
+  if (!verifiedThumbnail) {
+    try {
+      verifiedThumbnail = await searchWikipediaImage(geoInfo.name);
+    } catch {
+      // ignore
+    }
+  }
+
   // 4. Assemble clean destination object
   const newDestination = {
     id: canonicalSlug,
@@ -206,7 +217,7 @@ export async function fetchDynamicDestination(cityName) {
     currency: profile.currency || 'Local currency',
     tags: Array.isArray(profile.tags) && profile.tags.length ? profile.tags : ['Culture', 'Historical'],
     famousPlaces: Array.isArray(profile.famousPlaces) && profile.famousPlaces.length ? profile.famousPlaces : [],
-    wikivoyageThumbnail: wiki?.thumbnail || null,
+    wikivoyageThumbnail: verifiedThumbnail,
     isDynamic: true,
     addedAt: new Date().toISOString()
   };

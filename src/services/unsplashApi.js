@@ -1,5 +1,6 @@
-const ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+const ACCESS_KEY = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_UNSPLASH_ACCESS_KEY) || (typeof process !== 'undefined' && process.env?.VITE_UNSPLASH_ACCESS_KEY);
 const BASE_URL = 'https://api.unsplash.com';
+
 
 const imageCache = new Map();
 
@@ -91,20 +92,23 @@ function generatePlaceholders(query, count) {
   const qLower = query.toLowerCase();
   let photoUrl = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80'; // default travel
 
-  if (qLower.includes('jaipur') || qLower.includes('amber') || qLower.includes('hawa')) {
+  if (qLower.includes('davangere') || qLower.includes('davanagere')) {
+    photoUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/HBPA_N_1107_Davanagere_Glass_House.jpg/1280px-HBPA_N_1107_Davanagere_Glass_House.jpg';
+  } else if (qLower.includes('jaipur') || qLower.includes('hawa mahal') || qLower.includes('amber fort')) {
     photoUrl = 'https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&q=80';
-  } else if (qLower.includes('agra') || qLower.includes('taj')) {
+  } else if (qLower.includes('taj mahal') || (qLower.includes('agra') && !qLower.includes('davangere'))) {
+    // Only return Taj Mahal if query is specifically Agra or Taj Mahal
     photoUrl = 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80';
-  } else if (qLower.includes('varanasi') || qLower.includes('ganga') || qLower.includes('ghat')) {
+  } else if (qLower.includes('varanasi') || qLower.includes('ganga ghat')) {
     photoUrl = 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=800&q=80';
-  } else if (qLower.includes('kerala') || qLower.includes('backwater') || qLower.includes('munnar')) {
+  } else if (qLower.includes('kerala') || qLower.includes('backwaters')) {
     photoUrl = 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80';
-  } else if (qLower.includes('goa') || qLower.includes('beach') || qLower.includes('island')) {
-    photoUrl = 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80';
+  } else if (qLower.includes('goa') || qLower.includes('beach') || qLower.includes('coast')) {
+    photoUrl = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80';
   } else if (qLower.includes('mumbai') || qLower.includes('bombay')) {
     photoUrl = 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&q=80';
   } else if (qLower.includes('temple') || qLower.includes('shrine')) {
-    photoUrl = 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80';
+    photoUrl = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80';
   } else if (qLower.includes('mountain') || qLower.includes('alps') || qLower.includes('peak')) {
     photoUrl = 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=800&q=80';
   } else if (qLower.includes('waterfall') || qLower.includes('lake')) {
@@ -112,8 +116,9 @@ function generatePlaceholders(query, count) {
   } else if (qLower.includes('museum') || qLower.includes('gallery')) {
     photoUrl = 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=800&q=80';
   } else if (qLower.includes('palace') || qLower.includes('fort') || qLower.includes('castle')) {
-    photoUrl = 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80';
+    photoUrl = 'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80';
   }
+
 
   const placeholders = [];
   for (let i = 0; i < count; i++) {

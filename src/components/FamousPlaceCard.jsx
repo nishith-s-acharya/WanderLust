@@ -1,27 +1,44 @@
 import { useState, useEffect } from 'react';
 import { Lightbulb } from 'lucide-react';
-import { searchPhotos } from '../services/unsplashApi';
+import { resolvePlaceImage } from '../services/imageResolver';
 import { getPlaceFallback } from '../utils/fallbackImages';
 import './FamousPlaceCard.css';
 
 export default function FamousPlaceCard({ place, destinationName, index = 0 }) {
-  const fallbackUrl = getPlaceFallback(place, { name: destinationName });
-  const [image, setImage] = useState(() => ({ urlSmall: fallbackUrl }));
+  const fallbackUrl = place?.image || getPlaceFallback(place, { name: destinationName });
+  const [image, setImage] = useState(() => ({
+    urlSmall: fallbackUrl,
+    alt: `${place.name} in ${destinationName}`
+  }));
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    searchPhotos(`${place.name} ${destinationName}`, 1)
-      .then(photos => {
-        if (photos.length > 0) {
-          setImage(photos[0]);
-        } else {
-          setImage({ urlSmall: fallbackUrl });
+    if (place?.image) {
+      setImage({
+        urlSmall: place.image,
+        alt: `${place.name} in ${destinationName}`
+      });
+      return;
+    }
+
+    let isMounted = true;
+    resolvePlaceImage(place, destinationName)
+      .then(resolved => {
+        if (isMounted && resolved) {
+          setImage(resolved);
         }
       })
       .catch(() => {
-        setImage({ urlSmall: fallbackUrl });
+        if (isMounted) {
+          setImage({ urlSmall: fallbackUrl, alt: `${place.name} in ${destinationName}` });
+        }
       });
-  }, [place.name, destinationName, fallbackUrl]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [place, destinationName, fallbackUrl]);
+
 
   return (
     <article
