@@ -182,15 +182,22 @@
   font-size: var(--text-body);
 }
 
-.hero__cta-alt {
-  border-color: rgba(255, 255, 255, 0.4);
-  color: var(--color-chalk);
+.hero .hero__cta-alt,
+.hero .btn-secondary {
+  border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
-.hero__cta-alt:hover {
-  border-color: var(--color-chalk);
-  background-color: rgba(255, 255, 255, 0.1);
+.hero .hero__cta-alt:hover,
+.hero .btn-secondary:hover {
+  border-color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
 }
+
 
 .hero__stats {
   display: flex;

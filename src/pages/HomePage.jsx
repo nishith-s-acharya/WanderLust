@@ -31,8 +31,9 @@ export default function HomePage() {
   }, []);
 
   const filteredDestinations = useMemo(() => {
-    return filterDestinations(searchQuery, activeTag);
+    return filterDestinations(searchQuery, activeTag, destVersion);
   }, [searchQuery, activeTag, destVersion]);
+
 
 
   // Refs for GSAP scroll animations

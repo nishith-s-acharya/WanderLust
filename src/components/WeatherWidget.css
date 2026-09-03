@@ -45,11 +45,13 @@
   letter-spacing: var(--tracking-heading);
   text-transform: uppercase;
   line-height: 1;
+  color: var(--color-obsidian);
 }
 
 .weather-widget__country {
   font-size: var(--text-body-sm);
-  color: var(--color-obsidian-50);
+  color: var(--color-obsidian-60);
+  font-weight: 500;
 }
 
 .weather-widget__condition {
@@ -78,6 +80,7 @@
   font-size: var(--text-heading-2xl);
   line-height: 1;
   letter-spacing: var(--tracking-heading);
+  color: var(--color-obsidian);
 }
 
 .weather-widget--compact .weather-widget__temp {
@@ -87,6 +90,8 @@
 .weather-widget__description {
   font-size: var(--text-body);
   text-transform: capitalize;
+  color: var(--color-obsidian-70);
+  font-weight: 500;
 }
 
 .weather-widget__feels {
@@ -107,6 +112,8 @@
   align-items: center;
   gap: var(--spacing-8);
   font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-obsidian);
   flex: 1;
 }
 
@@ -114,6 +121,7 @@
   color: var(--color-ember);
   flex-shrink: 0;
 }
+
 
 .weather-widget__detail-label {
   display: none;

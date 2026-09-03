@@ -149,27 +149,32 @@
   display: block;
   font-family: var(--font-caption);
   font-size: var(--text-caption);
-  color: var(--color-obsidian-50);
+  color: var(--color-obsidian-60);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: var(--spacing-4);
+  font-weight: 500;
 }
 
 .destination-page__fact-value {
   display: block;
   font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-obsidian);
 }
 
 /* Section titles */
 .destination-page__section-title {
   margin-bottom: var(--spacing-8);
+  color: var(--color-obsidian);
 }
 
 .destination-page__section-subtitle {
-  color: var(--color-obsidian-50);
+  color: var(--color-obsidian-60);
   font-size: var(--text-body);
   margin-bottom: var(--spacing-40);
 }
+
 
 /* Places grid */
 .destination-page__places-grid {

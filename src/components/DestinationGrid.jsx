@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Sparkles, Globe, Compass, ArrowRight } from 'lucide-react';
+import { Sparkles, Globe, Compass, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import DestinationCard from './DestinationCard';
@@ -9,6 +9,7 @@ import './DestinationGrid.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const INITIAL_CARD_COUNT = 6;
 
 export default function DestinationGrid({ destinations, searchQuery = '' }) {
   const navigate = useNavigate();
@@ -16,6 +17,16 @@ export default function DestinationGrid({ destinations, searchQuery = '' }) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatingCity, setGeneratingCity] = useState('');
   const [generateError, setGenerateError] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_CARD_COUNT);
+  const [prevFilterKey, setPrevFilterKey] = useState(() => `${searchQuery}-${destinations.length}`);
+
+  // Reset pagination to minimal cards when search query or destination set changes
+  const currentFilterKey = `${searchQuery}-${destinations.length}`;
+  if (prevFilterKey !== currentFilterKey) {
+    setPrevFilterKey(currentFilterKey);
+    setVisibleCount(INITIAL_CARD_COUNT);
+  }
+
 
   const handleDiscover = async (cityName) => {
     const target = cityName?.trim();
@@ -51,17 +62,18 @@ export default function DestinationGrid({ destinations, searchQuery = '' }) {
         onEnter: (batch) => {
           gsap.fromTo(
             batch,
-            { opacity: 0, y: 35, scale: 0.98 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'power2.out', stagger: 0.08, overwrite: 'auto' }
+            { opacity: 0, y: 30, scale: 0.98 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: 'power2.out', stagger: 0.06, overwrite: 'auto' }
           );
         },
-        start: 'top 90%',
+        start: 'top 92%',
         once: true,
       });
     }, gridRef);
 
     return () => ctx.revert();
-  }, [destinations]);
+  }, [destinations, visibleCount]);
+
 
   // Zero search results view with AI Generator option
   if (!destinations || destinations.length === 0) {
@@ -152,16 +164,59 @@ export default function DestinationGrid({ destinations, searchQuery = '' }) {
     );
   }
 
+  const visibleDestinations = destinations.slice(0, visibleCount);
+  const hasMore = visibleCount < destinations.length;
+  const remainingCount = destinations.length - visibleCount;
+
   return (
     <div ref={gridRef} className="destination-grid-wrapper">
       <div className="destination-grid" role="list" aria-label="Destinations">
-
-        {destinations.map((destination, index) => (
+        {visibleDestinations.map((destination, index) => (
           <div key={destination.id} role="listitem">
             <DestinationCard destination={destination} index={index} />
           </div>
         ))}
       </div>
+
+      {/* Minimal Cards Expansion Controls with Down Arrow */}
+      {destinations.length > INITIAL_CARD_COUNT && (
+        <div className="destination-grid__pagination">
+          {hasMore ? (
+            <button
+              type="button"
+              className="destination-grid__view-more-btn"
+              onClick={() => setVisibleCount((prev) => Math.min(prev + 6, destinations.length))}
+              aria-label="View more destination cards"
+            >
+              <div className="destination-grid__view-more-content">
+                <span className="destination-grid__view-more-title">
+                  View More Destinations
+                </span>
+                <span className="destination-grid__view-more-subtitle">
+                  Showing {visibleCount} of {destinations.length} places (click to load {remainingCount > 6 ? 6 : remainingCount} more)
+                </span>
+              </div>
+              <div className="destination-grid__arrow-pill">
+                <ChevronDown size={20} className="destination-grid__arrow-down" />
+              </div>
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="destination-grid__show-less-btn"
+              onClick={() => {
+                setVisibleCount(INITIAL_CARD_COUNT);
+                document.getElementById('destinations')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              aria-label="Show fewer destination cards"
+            >
+              <span>Show Fewer Destinations</span>
+              <ChevronUp size={18} />
+            </button>
+          )}
+        </div>
+      )}
+
 
       {/* Dynamic Destination Discovery Bar at bottom of grid */}
       <div className="destination-grid__custom-bar card">

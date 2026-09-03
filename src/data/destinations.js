@@ -868,7 +868,7 @@ export function filterByTag(tag) {
   return all.filter(d => d.tags.includes(tag));
 }
 
-export function filterDestinations(query, tag) {
+export function filterDestinations(query, tag, _version = 0) {
   let results = getAllDestinations();
   if (query && query.trim()) {
     const q = query.toLowerCase().trim();

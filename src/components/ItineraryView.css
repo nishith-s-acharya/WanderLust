@@ -144,7 +144,8 @@
   align-items: center;
   gap: var(--spacing-4);
   font-size: var(--text-body-sm);
-  color: var(--color-obsidian-50);
+  font-weight: 500;
+  color: var(--color-obsidian-60);
   min-width: 90px;
   flex-shrink: 0;
   padding-top: 2px;
@@ -160,8 +161,9 @@
 
 .itinerary-activity__name {
   font-family: var(--font-body);
-  font-weight: var(--weight-medium);
+  font-weight: 600;
   font-size: var(--text-body);
+  color: var(--color-obsidian);
   margin-bottom: var(--spacing-4);
   text-transform: none;
   letter-spacing: 0;
@@ -169,7 +171,7 @@
 
 .itinerary-activity__description {
   font-size: var(--text-body-sm);
-  color: var(--color-obsidian-50);
+  color: var(--color-obsidian-70);
   line-height: var(--leading-body);
 }
 
@@ -184,6 +186,7 @@
   font-size: var(--text-caption);
   color: var(--color-obsidian);
 }
+
 
 .itinerary-activity__tip svg {
   flex-shrink: 0;
